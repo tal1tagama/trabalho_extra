@@ -1,32 +1,20 @@
-import 'dotenv/config'
-import app from "../src/app.js"
-import cors from '@fastify/cors'
-import { database } from "./database/index.js"
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import marcaRoutes from './routes/marca.js';
+import produtoRoutes from './routes/produto.js';
+import pedidoRoutes from './routes/pedido.js';
 
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const PORT = 3000;
+app.use(express.json());
+app.use(cors()); 
+
+app.use('/api/marcas', marcaRoutes);
+app.use('/api/produtos', produtoRoutes);
+app.use('/api/pedidos', pedidoRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
-async function server() {
-    app.register(cors, {
-        origin: true,
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"]
-    })
-
-    app.listen({
-        host: '0.0.0.0',
-        port: process.env.PORT
-    }).then(() => {
-        console.log('HTTP Server is running on PORT:' + process.env.PORT)
-    })
-
-    // const query = await database('marcas').select();
-    // console.log('Query :', query)
-    // database.raw('SELECT * FROM marcas WHERE id = 1;')
-    //     .then(result => console.log(result[0]))
-}
-
-server();

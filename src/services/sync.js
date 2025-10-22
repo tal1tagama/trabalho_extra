@@ -1,6 +1,6 @@
-const Marca = require('../models/marca');
-const Produto = require('../models/produto');
-const Pedido = require('../models/pedido');
+const Marca = require('../http/models/marca');
+const Produto = require('../http/models/Produto');
+const Pedido = require('../http/models/pedido');
 const createMySQLConnection = require('../config/mysqlconfig');
 
 async function syncMarcas(mysqlConn) {

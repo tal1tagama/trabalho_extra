@@ -1,6 +1,15 @@
-const Pedido = require('../models/Pedido');
+import Pedido from '../models/pedido.js';
 
-exports.createPedido = async (req, res) => {
+export async function listarPedidos(req, res) {
+  try {
+    const pedidos = await Pedido.find().populate('produtos');
+    res.json(pedidos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function criarPedido(req, res) {
   try {
     const pedido = new Pedido(req.body);
     await pedido.save();
@@ -8,13 +17,4 @@ exports.createPedido = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-};
-
-exports.getPedidos = async (req, res) => {
-  try {
-    const pedidos = await Pedido.find().populate('produtos.produtoId');
-    res.json(pedidos);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+}
