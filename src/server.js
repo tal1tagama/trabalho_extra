@@ -3,7 +3,6 @@ import app from "../src/app.js"
 import cors from '@fastify/cors'
 import { database } from "./database/index.js"
 
-import app from './app.js'; 
 
 const PORT = 3000;
 

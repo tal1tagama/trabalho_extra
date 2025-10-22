@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const marcaController = require('../controllers/marcaController');
+const marca = require('../controllers/marca');
 
-router.post('/marcas', marcaController.createMarca);
-router.get('/marcas', marcaController.getMarcas);
+router.post('/marcas', marca.createMarca);
+router.get('/marcas', marca.getMarcas);
 
 module.exports = router;
